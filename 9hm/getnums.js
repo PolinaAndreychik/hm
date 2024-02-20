@@ -1,14 +1,14 @@
 // 2
-function random15 (min,max)  {
+function getRandom15 (min,max)  {
     return number = Math.floor(Math.random()*(max-min)+ min)
 }
-random15(1,6)
-// console.log(random15(1,6))
-function random106 (min,max)  {
+getRandom15(1,6)
+console.log(getRandom15(1,6))
+function getRandom106 (min,max)  {
     return number1 = Math.floor(Math.random()*(max-min)+ min)
 }
-random106(6,11)
-// console.log(random106(6,11))
+getRandom106(6,11)
+console.log(getRandom106(6,11))
 function getNum(num, timeout) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -16,15 +16,15 @@ function getNum(num, timeout) {
         }, timeout)
     })
 }
-getNum(number,3000)
-getNum(number1,5000)
+let promise1 = getNum(number,3000)
+let promise2 = getNum(number1,5000)
 
-async function square() {
-    console.log(await getNum(number,3000) * await getNum(number,3000));
+async function getSquare() {
+    console.log(await promise1 * await promise1);
 }
-square()
+getSquare()
 
-async function addition() {
-    console.log(await getNum(number,3000) + await getNum(number1,5000));
+async function getAddition() {
+    console.log(await promise1 + await promise2);
 }
-addition()
+getAddition()

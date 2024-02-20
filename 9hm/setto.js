@@ -1,4 +1,4 @@
-// 1
+1
 const prom1 = new Promise((resolve, reject) => {
     let time = Math.floor(Math.random()*(6-1)+ 1)
     setTimeout(() => {
