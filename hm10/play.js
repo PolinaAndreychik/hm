@@ -4,7 +4,7 @@ const Car = require('./car');
 const Ball = require('./ball');
 
 const doll1 = new Doll(`doll`,10, `medium`, `blue`, 1, `cloth`)
-const doll2 = new Doll(`doll`, 15, `big`, `green`, 2,`plastic`)
+const doll2 = new Doll(`doll`, 15, `medium`, `green`, 2,`plastic`)
 const doll3 = new Doll(`doll`, 8, `small`, `yellow`, 0, `cloth`)
 
 const car1 = new Car(`car`, 20, `big`, `plastic`,3, `tractor`)
@@ -27,24 +27,16 @@ playroom.addToy(ball1)
 playroom.addToy(ball2)
 playroom.addToy(ball3)
 
-// console.log(playroom.filterByAgeAndCostAndSize())
-// console.log(playroom.filterByNameAndCost())
-// console.log(playroom.filterByAgeAndMaterial())
-//
-// console.log(playroom.filterByAgeAppropriate())
-// console.log(playroom.filterBySize())
-// console.log(playroom.filterByCost())
-// console.log(playroom.filterByToyName())
-// console.log(playroom.filterByColour())
+console.log(playroom.filterByMaterial(`metal`).filterByToyName(`car`).filterBySize(`small`))
 
-// console.log(playroom.filterByDollColour())
-// console.log(playroom.filterByDollMadeOutOf())
-//
-// console.log(playroom.filterByCarClass())
-// console.log(playroom.filterByCarMadeOutOf())
-//
-// console.log(playroom.filterByBallColour())
-
+console.log(playroom.filterBySize(`small`))
+console.log(playroom.filterByToyName(`ball`))
+console.log(playroom.filterByColour(`green`))
+console.log(playroom.filterByCarClass(`bike`))
+console.log(playroom.filterToysByAgeRange(5,1))
+console.log(playroom.filterToysByCostRange(5,15))
+console.log(playroom.sortByAge())
+console.log(playroom.sortByCost())
 
 
 
