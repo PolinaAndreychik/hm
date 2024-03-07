@@ -81,8 +81,8 @@ export class ObjectManipulator {
     return this.obj;
   }
 }
-const user1 = { name: `Dasha`, age: 14, catsName: `Sus`, catSummary: 5 };
-const manipulator = new ObjectManipulator(user1);
+const userDasha = { name: `Dasha`, age: 14, catsName: `Sus`, catAge: 5 };
+const manipulator = new ObjectManipulator(userDasha);
 console.log(manipulator.getObject());
 
 //4.1
@@ -101,7 +101,7 @@ console.log(manipulator.getObject());
  * @param {Array} input
  * @return {Array | Function}
  */
-export function map(mapper: any, input: any[]) {
+export function map(mapper?: any, input?: any[]) {
   if (arguments.length === 0) {
     return map;
   }
@@ -115,7 +115,63 @@ export function map(mapper: any, input: any[]) {
   }
   return input.map(mapper);
 }
-function square(item: any) {
-  return item + item;
+// console.log(map(map,[2,2,3,4,5]));
+/**
+* 2 arguments passed: returns a new array
+* which is a result of input being filtered using
+* the specified filter function.
+*
+* 1 argument passed: returns a function which accepts
+* an input and returns a new array which is a result
+* of input being filtered using original filter
+* function.
+*
+* 0 arguments passed: returns itself.
+*
+* @param {Function} filterer
+* @param {Array} input
+* @return {Array | Function}
+*/
+export function filter(filterer?: any, input?: string[]) {
+  if (arguments.length === 0) {
+    return filter;
+  }
+  if (arguments.length === 1) {
+    return function subFunction(subInput: any[]) {
+      if (arguments.length === 0) {
+        return subFunction;
+      }
+      return subInput.filter(filterer);
+    };
+  }
+  return input.filter(filterer);
 }
-console.log(map(square, [2]));
+// console.log(filter(filter,[`srt`,`tre`]))
+
+/**
+ * 2 arguments passed: returns sum of a and b.
+ *
+ * 1 argument passed: returns a function which expects
+ * b and returns sum of a and b.
+ *
+ * 0 arguments passed: returns itself.
+ *
+ * @param {Number} a
+ * @param {Number} b
+ * @return {Number | Function}
+ */
+export function add(a?: number, b?:number) {
+  if (arguments.length === 0) {
+    return add;
+  }
+  if (arguments.length === 1) {
+    return function subFunction(subB:number) {
+      if (arguments.length === 0) {
+        return subFunction;
+      }
+      return a + subB;
+    };
+  }
+  return a + b;
+}
+console.log(add(2))
