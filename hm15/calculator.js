@@ -48,5 +48,4 @@ export class Calculator {
         return number * number;
     }
 };
-
 export const {add, multiply, subtraction, divide, exponentiation} = new Calculator()
