@@ -3,10 +3,10 @@ name: Run first test in CI
 on:
   push:
     branches:
-      - 'hm15'
+      - 'main'
   pull_request:
     branches:
-      - 'hm15'
+      - 'main'
 
 jobs:
   testing:
