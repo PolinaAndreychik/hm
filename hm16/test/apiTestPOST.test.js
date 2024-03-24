@@ -1,6 +1,6 @@
 const axios = require('axios');
 const {Validator} = require('jsonschema');
-const getBooksJsonSchema = require('../testData/postBooks.v1.json')
+const postBooksJsonSchema = require('../testData/postBooks.v1.json')
 
 const validator = new Validator();
 
@@ -27,7 +27,7 @@ describe('API tests POST', function () {
     })
 
     test('POST /api/v1/Books should be valid jsonschema', async () => {
-        const validationResult = await validator.validate(result.data, getBooksJsonSchema);
+        const validationResult = await validator.validate(result.data, postBooksJsonSchema);
         expect(validationResult.valid).toEqual(true)
     })
 })

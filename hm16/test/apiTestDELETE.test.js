@@ -1,5 +1,4 @@
 const axios = require('axios');
-const getBooksJsonSchema = require("../testData/getBooks.v1.json");
 
 describe('API tests DELETE', function () {
     let result;
