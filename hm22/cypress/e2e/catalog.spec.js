@@ -17,7 +17,7 @@ describe('Oz.by e2e catalog tests', () => {
             filters.getTopFilterArrangeExpensiveFirst();
             cy.validateElementsText(catalogPages.catalogProduct, BLANKET.BLANKET_TITLE);
     })
-    it('Goes to `Сладости`, picks `Капсульный кофе`, selects filters and products page should have nothing',() => {
+    it(`Goes to 'Сладости', picks 'Капсульный кофе', selects filters and page url should contain 'coffee/?availability=1%3B2&sort=rating_desc&ti3=2'`,() => {
             homePage.navigate('https://oz.by/')
             leftNavMenu.getToTheSpecificInnerNavMenuItem('Сладости', 'Капсульный кофе');
             filters.getTopFilterArrangeByRating();
@@ -36,7 +36,7 @@ describe('Oz.by e2e catalog tests', () => {
             filters.applyFilters();
             cy.validateElementsText(catalogPages.catalogProduct, BOOK.BOOK_TITLE);
     })
-    it('Goes to `Техника` picks `Электроника..`, `Игры для консолей` selects filters, clears filters and page url should be `https://oz.by/electronics/topic1114129.html`', () => {
+    it('Goes to `Техника` picks `Электроника..`, `Планшеты` selects filters, clears filters and page product should have a price `2078,72`', () => {
             homePage.navigate('https://oz.by/')
             leftNavMenu.goToGeneralCatalog('Техника');
             catalogPages.landingNavListClick('Электроника, аксессуары');
