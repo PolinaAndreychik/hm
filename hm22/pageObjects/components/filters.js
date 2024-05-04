@@ -30,8 +30,8 @@ class Filters extends Base {
         return cy.get('.filters__chkslist--simple [data-sort=\'rating_desc\']')
     }
 
-     filtersSectionSpecificItem(item) {
-        return cy.xpath(`//*[contains(@class,'filters__chkslist__item')]//*[contains(text(),'${item}')]`)
+     filtersSectionSpecificItem(filter) {
+        return cy.xpath(`//*[contains(@class,'fm-form filters filters_side')]//*[contains(text(),'${filter}')]`)
     }
 
     selectFilters(item) {
@@ -45,21 +45,21 @@ class Filters extends Base {
         this.applyFiltersButton.click();
     }
 
-     getCostFilters(costFrom, costTo) {
+     setCostFilters(costFrom, costTo) {
         this.costRangeFromFilter.type(costFrom);
         this.costRangeToFilter.type(costTo);
     }
 
-     getPlaceFilters(cityName, streetName) {
+     setPlaceFilters(cityName, streetName) {
         this.getAvailabilityInStoresCityFilter(cityName).click();
         this.getAvailabilityInStoresStreetFilter(streetName).click();
     }
 
-    getTopFilterArrangeExpensiveFirst() {
+    setTopFilterArrangeExpensiveFirst() {
         this.topFilterArrange.click();
         this.topFilterExpensiveFirst.click();
     }
-    getTopFilterArrangeByRating() {
+    setTopFilterArrangeByRating() {
         this.topFilterArrange.click();
         this.topFilterArrangeByRating.click();
     }

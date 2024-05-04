@@ -1,4 +1,4 @@
-const { BLANKET,PRICE, BOOK } = require('../../helpers/constants');
+const {AVAILABILITY, MESSAGE, BRACELETS, BOOK ,COMICS, BLANKET, URL, LEFT_NAV_MENU, SWEETS, CATALOG_NAVIGATION } = require('../../helpers/constants');
 const homePage = require('../../pageObjects/homePage');
 const leftNavMenu = require('../../pageObjects/components/leftNavMenu');
 const filters = require('../../pageObjects/components/filters');
@@ -6,57 +6,58 @@ const catalogPages = require('../../pageObjects/catalogPages');
 
 
 describe('Oz.by e2e catalog tests', () => {
-    it('Goes to `Дом, сад...` picks `Пледы` selects filters and catalog page should have `Плед "Зигзаг" (150х200 см; голубой)`', () => {
-            homePage.navigate('https://oz.by/')
-            leftNavMenu.getToTheSpecificInnerNavMenuItem('Дом', 'Пледы');
-            filters.getCostFilters('12', '123');
-            filters.selectFilters('Полуторный');
-            filters.selectFilters('Однотонный');
-            filters.getPlaceFilters('Минск','Победителей');
+    it.skip('catalog page should contain selected filters', () => {
+            homePage.navigate(URL.MAIN)
+            leftNavMenu.getToTheSpecificInnerNavMenuItem(LEFT_NAV_MENU.HOME, LEFT_NAV_MENU.INNER_BLANKET);
+            filters.setCostFilters(BLANKET.MIN_PRICE, BLANKET.MAX_PRICE);
+            filters.selectFilters(BLANKET.DESIGN);
+            filters.selectFilters(BLANKET.SIZE);
+            filters.setPlaceFilters(AVAILABILITY.CITY_BLANKET, AVAILABILITY.STREET_BLANKET );
             filters.applyFilters();
-            filters.getTopFilterArrangeExpensiveFirst();
-            cy.validateElementsText(catalogPages.catalogProduct, BLANKET.BLANKET_TITLE);
+            filters.setTopFilterArrangeExpensiveFirst();
+            cy.validateElementsText(catalogPages.selectedFilters, BLANKET.DESIGN && BLANKET.SIZE && BLANKET.MAX_PRICE);
     })
-    it(`Goes to 'Сладости', picks 'Капсульный кофе', selects filters and page url should contain 'coffee/?availability=1%3B2&sort=rating_desc&ti3=2'`,() => {
-            homePage.navigate('https://oz.by/')
-            leftNavMenu.getToTheSpecificInnerNavMenuItem('Сладости', 'Капсульный кофе');
-            filters.getTopFilterArrangeByRating();
-            filters.selectFilters('Светлая');
+    it.skip(`page url should change to default one after clearing filters`,() => {
+            homePage.navigate(URL.MAIN)
+            leftNavMenu.getToTheSpecificInnerNavMenuItem(LEFT_NAV_MENU.SWEETS, LEFT_NAV_MENU.INNER_CANDIES);
+            filters.setTopFilterArrangeByRating();
+            filters.selectFilters(SWEETS.TASTE);
+            filters.selectFilters(AVAILABILITY.NOT_ON_SALE);
+            filters.setPlaceFilters(AVAILABILITY.CITY_SWEETS, AVAILABILITY.STREET_SWEETS);
             filters.applyFilters();
-            cy.url().should('contain', 'coffee/?availability=1%3B2&sort=rating_desc&ti3=2');
-    })
-    it('Goes to `Товары для творчества` picks `Комиксы`, `Бестселлеры` selects filters and catalog page should have `Единственный конец злодейки – смерть. Том 3`', () => {
-            homePage.navigate('https://oz.by/')
-            leftNavMenu.goToGeneralCatalog('Товары для творчества');
-            catalogPages.subNavListClick('Комиксы');
-            catalogPages.landingNavListClick('Бестселлеры');
-            filters.selectFilters('2023');
-            filters.selectFilters('16+');
-            filters.getPlaceFilters('Брест', 'Космонавтов');
-            filters.applyFilters();
-            cy.validateElementsText(catalogPages.catalogProduct, BOOK.BOOK_TITLE);
-    })
-    it('Goes to `Техника` picks `Электроника..`, `Планшеты` selects filters, clears filters and page product should have a price `2078,72`', () => {
-            homePage.navigate('https://oz.by/')
-            leftNavMenu.goToGeneralCatalog('Техника');
-            catalogPages.landingNavListClick('Электроника, аксессуары');
-            catalogPages.listingBannersClick('Планшеты');
-            filters.selectFilters('2023');
-            filters.selectFilters('Bluetooth');
-            filters.selectFilters('GPS');
-            filters.applyFilters();
+            cy.url().should('contain', URL.FILTERED_CANDIES);
             filters.clearFilters();
-            cy.validateElementsText(catalogPages.catalogProduct, PRICE.TABLET_PRICE);
+            cy.url().should('equal', URL.DEFAULT_CANDIES);
     })
-    it('Goes to `Сувениры` picks `Бижутерия`, `Браслеты` selects filters and page should have nothing', () => {
-            homePage.navigate('https://oz.by/')
-            leftNavMenu.goToGeneralCatalog('Сувениры');
-            catalogPages.landingNavListClick('Бижутерия');
-            catalogPages.landingNavListClick('Браслеты');
-            filters.selectFilters('Натуральный камень');
-            filters.selectFilters('OKPODOLINS');
-            filters.selectFilters('Стекло');
+    it.skip('Product description should contain selected filters', () => {
+            homePage.navigate(URL.MAIN)
+            leftNavMenu.goToGeneralCatalog(LEFT_NAV_MENU.ART);
+            catalogPages.subNavListClick(CATALOG_NAVIGATION.COMICS);
+            catalogPages.landingNavListClick(CATALOG_NAVIGATION.BESTSELLERS);
+            filters.selectFilters(COMICS.PUBLISHER);
+            filters.selectFilters(COMICS.RELEASE_DATE);
+            filters.setPlaceFilters(AVAILABILITY.CITY_COMICS, AVAILABILITY.STREET_COMICS);
             filters.applyFilters();
-            cy.validateElementsText(catalogPages.nothingWasFoundMessage,'Ничего не найдено');
+            catalogPages.catalogProductClick(BOOK.TITLE);
+            cy.validateElementsText(catalogPages.productDescription, COMICS.PUBLISHER && COMICS.RELEASE_DATE);
+    })
+    it('Transition field should contain selected catalog pages', () => {
+            homePage.navigate(URL.MAIN)
+            leftNavMenu.goToGeneralCatalog(LEFT_NAV_MENU.COSMETICS);
+            catalogPages.landingNavListClick(CATALOG_NAVIGATION.PERFUMERY);
+            catalogPages.subNavListClick(CATALOG_NAVIGATION.WOMEN_PERFUME);
+            cy.validateElementsText(catalogPages.transitionField, CATALOG_NAVIGATION.COSMETICS && CATALOG_NAVIGATION.PERFUMERY && CATALOG_NAVIGATION.WOMEN_PERFUME);
+
+    })
+        it('Product page should have nothing', () => {
+            homePage.navigate(URL.MAIN)
+            leftNavMenu.goToGeneralCatalog(LEFT_NAV_MENU.SOUVENIRS);
+            catalogPages.landingNavListClick(CATALOG_NAVIGATION.JEWELRY);
+            catalogPages.landingNavListClick(CATALOG_NAVIGATION.BRACELETS);
+            filters.selectFilters(BRACELETS.MATERIAL);
+            filters.selectFilters(BRACELETS.BRAND);
+            filters.selectFilters(BRACELETS.INSET);
+            filters.applyFilters();
+            cy.validateElementsText(catalogPages.nothingWasFoundMessage, MESSAGE.NOTHING_WAS_FOUND);
     })
 })

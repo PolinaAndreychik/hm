@@ -1,15 +1,22 @@
 const Base = require('./base');
 class CatalogPages extends Base {
 
-    get catalogProduct() {
-        return cy.xpath(`//*[contains(@class,'viewer-type-card--js-active')]`)
+    specificCatalogProduct(title) {
+        return cy.xpath(`//span[contains(text(),'${title}')]//parent::*[@class='link product-card__link']`)
+    }
+    get transitionField() {
+        return cy.get(`.breadcrumbs__inner`)
+    }
+    get productDescription() {
+        return cy.xpath(`//*[@class='b-description__container-col']`)
     }
     get nothingWasFoundMessage() {
         return cy.get('.mn-layout__col-2__inner')
     }
-     listingBanners(title) {
-        return cy.xpath(`//*[@class='listing-bnrs__bnr']//*[contains(text(),'${title}')]`)
+    get selectedFilters() {
+        return cy.get(`.top-filters__sqcheckers--flat`)
     }
+
      landingNavList(title) {
         return cy.xpath(`//*[@class='landing-nav-list__content']//*[contains(text(),'${title}')]`)
     }
@@ -22,8 +29,10 @@ class CatalogPages extends Base {
      landingNavListClick(title) {
         this.landingNavList(title).click();
     }
-     listingBannersClick(title) {
-        this.listingBanners(title).click();
+
+    catalogProductClick(title) {
+        this.specificCatalogProduct(title).click();
     }
+
 }
 module.exports =new CatalogPages();

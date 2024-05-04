@@ -31,4 +31,5 @@ Cypress.Commands.add('validateElementsText', (webElement, text) => {
     webElement.each(($el) => {
         cy.wrap($el).should('contain.text', text)
     })
-})
+});
+
