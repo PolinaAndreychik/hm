@@ -44,17 +44,17 @@ class CheckoutPage extends Base {
     return (`.i-popup-final .i-popup.i-popup_large`);
   }
   async deleteProductsFromTheCart() {
-    await this.customClick(this.page.locator(this.chooseAllProducts));
-    await this.customClick(this.page.locator(this.deleteProductsButton));
+    await this.click(this.page.locator(this.chooseAllProducts));
+    await this.click(this.page.locator(this.deleteProductsButton));
     await this.repeatClickAction(await this.page.locator(this.confirmDeleteButton), this.page.locator(this.deleteProductsButton));
   }
   async chooseDeliveryOptions(deliveryOption, paymentOption) {
-    await this.customClick(this.page.locator(this.deliveryAvailabilityButton));
-    await this.customClick(this.setDealInstructions(deliveryOption));
-    await this.customClick(this.continueButton(`delivery`));
-    await this.customClick(this.page.locator(this.paymentMethodButton));
-    await this.customClick(this.setDealInstructions(paymentOption));
-    await this.customClick(this.continueButton(`payment`));
+    await this.click(this.page.locator(this.deliveryAvailabilityButton));
+    await this.click(this.setDealInstructions(deliveryOption));
+    await this.click(this.continueButton(`delivery`));
+    await this.click(this.page.locator(this.paymentMethodButton));
+    await this.click(this.setDealInstructions(paymentOption));
+    await this.click(this.continueButton(`payment`));
   }
 }
 

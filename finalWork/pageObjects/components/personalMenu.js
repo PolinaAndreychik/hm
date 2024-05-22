@@ -23,7 +23,7 @@ class PersonalMenu extends Base {
     return (`.b-alert_ok`);
   }
   async cancelOrderConfirmation() {
-    await this.customClick(this.page.locator(this.cancelOrderButton));
+    await this.click(this.page.locator(this.cancelOrderButton));
     await this.repeatClickAction(await this.page.locator(this.confirmCancelingOrder), this.page.locator(this.cancelOrderButton));
   }
 }

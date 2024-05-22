@@ -37,22 +37,22 @@ class Filters extends Base {
   }
 
   async setCostFilters(costFrom, costTo) {
-    await this.customFill(this.page.locator(this.costRangeFromFilter), costFrom);
-    await this.customFill(this.page.locator(this.costRangeToFilter), costTo);
+    await this.fill(this.page.locator(this.costRangeFromFilter), costFrom);
+    await this.fill(this.page.locator(this.costRangeToFilter), costTo);
   }
 
   async setPlaceFilters(cityName, streetName) {
-    await this.customClick(this.getAvailabilityInStoresCityFilter(cityName));
-    await this.customClick(this.getAvailabilityInStoresStreetFilter(streetName));
+    await this.click(this.getAvailabilityInStoresCityFilter(cityName));
+    await this.click(this.getAvailabilityInStoresStreetFilter(streetName));
   }
 
   async setTopFilterArrangeExpensiveFirst() {
-    await this.customClick(this.page.locator(this.topFilterArrange));
-    await this.customClick(this.page.locator(this.topFilterExpensiveFirst));
+    await this.click(this.page.locator(this.topFilterArrange));
+    await this.click(this.page.locator(this.topFilterExpensiveFirst));
   }
   async setTopFilterArrangeByRating() {
-    await this.customClick(this.page.locator(this.topFilterArrange));
-    await this.customClick(this.page.locator(this.topFilterArrangeByRating));
+    await this.click(this.page.locator(this.topFilterArrange));
+    await this.click(this.page.locator(this.topFilterArrangeByRating));
   }
 }
 

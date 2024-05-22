@@ -5,7 +5,7 @@ const URL = {
   LOGIN_PAGE: `https://oz.by/personal/login.phtml?back_uri=https%3A%2F%2Foz.by%2F`,
 };
 const PRICE = {
-  CART: `32,89`,
+  CART: `35,13`,
   BLANKET_MIN_PRICE: '12',
   BLANKET_MAX_PRICE: '123',
   BRACELET_MIN_PRICE: `100`,
@@ -40,7 +40,6 @@ const CATALOG_NAVIGATION = {
   CUPS: 'Кружки',
 };
 const COMICS = {
-  RELEASE_DATE: `2023`,
   PUBLISHER: `Азбука`,
 };
 const DATE = {

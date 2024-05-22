@@ -28,7 +28,6 @@ class LoginPage extends Base {
   get signUpPhoneNumberField() {
     return ("input[tabindex='11']");
   }
-
   get submitSignUpButton() {
     return ("[id='registerForm'] .i-popup__form-button");
   }
@@ -36,15 +35,15 @@ class LoginPage extends Base {
     return ("[id='registerForm'] .i-popover__line");
   }
   async authorizeByEmail(email, password) {
-    await this.customClick(this.page.locator(this.logInByEmail));
-    await this.customFill(this.page.locator(this.emailField), email);
-    await this.customFill(this.page.locator(this.passwordField), password);
+    await this.click(this.page.locator(this.logInByEmail));
+    await this.fill(this.page.locator(this.emailField), email);
+    await this.fill(this.page.locator(this.passwordField), password);
   }
 
   async signUpByPhoneNumber(phoneNumber) {
-    await this.customClick(this.page.locator(this.signUpButton));
-    await this.customFill(this.page.locator(this.signUpPhoneNumberField), phoneNumber);
-    await this.customClick(this.page.locator(this.submitSignUpButton));
+    await this.click(this.page.locator(this.signUpButton));
+    await this.fill(this.page.locator(this.signUpPhoneNumberField), phoneNumber);
+    await this.click(this.page.locator(this.submitSignUpButton));
   }
 }
 

@@ -20,23 +20,23 @@ test.describe('Oz.by e2e search tests', async function () {
     await context.clearCookies();
   });
   test(`Search page should contain searched products`, async ({ page }) => {
-    await homePage.customFill(page.locator(header.searchField), PRODUCTS.AUTHOR);
+    await homePage.fill(page.locator(header.searchField), PRODUCTS.AUTHOR);
     await page.keyboard.press(KEYBOARD.ENTER);
-    await homePage.customClick(searchCatalog.categoryFilters(DATE._2021_DATE));
+    await homePage.click(searchCatalog.categoryFilters(DATE._2021_DATE));
     await expect(await page.locator(catalogPages.allProducts)).toContainText(PRODUCTS.AUTHOR);
     await expect(await page.locator(catalogPages.allProducts)).toContainText(DATE._2021_DATE);
   });
-  test(`Searching should find no products and suggests to change the request`, async ({ page }) => {
-    await homePage.customFill(page.locator(header.searchField), PRODUCTS.INVALID);
+  test(`Searching should suggests to change the request`, async ({ page }) => {
+    await homePage.fill(page.locator(header.searchField), PRODUCTS.INVALID);
     await page.keyboard.press(KEYBOARD.ENTER);
     await expect(await page.locator(searchCatalog.nothingWasFoundMessage)).toBeVisible();
-    await homePage.customClick(page.locator(searchCatalog.changeTheRequest));
+    await homePage.click(page.locator(searchCatalog.changeTheRequest));
     await expect(await page.locator(header.searchField)).toBeEditable();
   });
-  test(`Often searched products should be found after clarifying`, async ({ page }) => {
-    await homePage.customClick(page.locator(header.searchField));
-    await homePage.customClick(header.oftenSearchedProducts(PRODUCTS.BOOK_THREE));
-    await homePage.customClick(searchCatalog.clarifySearchedProduct(PRODUCTS.BOOK_THREE_TITLE));
+  test(`Search page should contain often searched products`, async ({ page }) => {
+    await homePage.click(page.locator(header.searchField));
+    await homePage.click(header.oftenSearchedProducts(PRODUCTS.BOOK_THREE));
+    await homePage.click(searchCatalog.clarifySearchedProduct(PRODUCTS.BOOK_THREE_TITLE));
     await expect(await page.locator(catalogPages.allProducts)).toContainText(PRODUCTS.BOOK_THREE_TITLE_CAPITAL);
   });
 });

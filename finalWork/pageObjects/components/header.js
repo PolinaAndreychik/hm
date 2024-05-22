@@ -16,9 +16,6 @@ class Header extends Base {
   get myOrders() {
     return (` [href="/personal/orders/"].nav-menu__link`);
   }
-  async cartAddedProductsNumber() {
-    return (`//*[contains(@class,'user-bar__cart')]//*[@data-user-bar-target="cartCounter"]`);
-  }
   async popularProducts(title) {
     return this.page.locator(`//*[@class='digi-product__label' and contains(text(),'${title}')]`);
   }
@@ -27,7 +24,7 @@ class Header extends Base {
   }
   async goToOrderedProducts() {
     await this.page.locator(this.userBarMyOzButton).hover();
-    await this.customClick(this.page.locator(this.myOrders));
+    await this.click(this.page.locator(this.myOrders));
   }
 }
 module.exports = Header;

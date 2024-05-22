@@ -12,7 +12,7 @@ class LeftNavMenu extends Base {
   }
   async getToTheSpecificInnerNavMenuItem(TitleName, InnerProductName) {
     await (await this.catalogTitle(TitleName)).hover();
-    await this.customClick(this.InnerCatalogProductName(InnerProductName));
+    await this.click(this.InnerCatalogProductName(InnerProductName));
   }
 }
 

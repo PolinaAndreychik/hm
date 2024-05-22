@@ -12,14 +12,8 @@ class CatalogPages extends Base {
   get allProducts() {
     return (`.digi-products`);
   }
-  get currentProductCost() {
-    return (`.digi-product__price-aftersale`);
-  }
   get addProductToCartOnProductPage() {
     return (`.addtocart-btn .i-button__inner`);
-  }
-  get transitionField() {
-    return (`[itemprop="name"]`);
   }
   get productDescription() {
     return (`//*[@class='b-description__container-col']`);
